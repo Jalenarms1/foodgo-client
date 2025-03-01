@@ -15,7 +15,7 @@ function App() {
     
 
     if (emailRx.test(email)) {
-      const resp = await fetch(import.meta.env.API_URL + "/user-account", {
+      const resp = await fetch("https://lalocura-go-production.up.railway.app" + "/user-account", {
         method: "POST",
         credentials: 'include',
         headers: {
