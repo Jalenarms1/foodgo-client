@@ -12,7 +12,7 @@ function App() {
     const password = passwordRef.current.value
 
     if (emailRx.test(email)) {
-      const resp = await fetch("http://dashboard.localhost:3333/user-account", {
+      const resp = await fetch(import.meta.env.API_URL +"/user-account", {
         method: "POST",
         credentials: 'include',
         headers: {
