@@ -10,9 +10,12 @@ function App() {
 
     const email = emailRef.current.value
     const password = passwordRef.current.value
+    
+    console.log(import.meta.env.API_URL);
+    
 
     if (emailRx.test(email)) {
-      const resp = await fetch(import.meta.env.API_URL +"/user-account", {
+      const resp = await fetch(import.meta.env.API_URL + "/user-account", {
         method: "POST",
         credentials: 'include',
         headers: {
