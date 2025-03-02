@@ -29,7 +29,6 @@ function App() {
 
       console.log(resp.status);
 
-      const data = await resp.json()
 
     } else {
 
