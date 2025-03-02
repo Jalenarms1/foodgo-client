@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import './App.css'
+import axios from "axios"
 
 function App() {
   const emailRef = useRef(null)
@@ -15,6 +16,10 @@ function App() {
     
 
     if (emailRx.test(email)) {
+      const res = await axios.post("https://lalocura-go-production.up.railway.app/user-account", JSON.stringify({
+        email,
+        password
+      }), {withCredentials: true})
       const resp = await fetch("https://lalocura-go-production.up.railway.app" + "/user-account", {
         method: "POST",
         credentials: 'include',
