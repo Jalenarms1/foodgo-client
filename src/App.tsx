@@ -20,21 +20,21 @@ function App() {
         email,
         password
       }), {withCredentials: true})
-      const resp = await fetch("https://lalocura-go-production.up.railway.app" + "/user-account", {
-        method: "POST",
-        credentials: 'include',
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          email,
-          password
-        })
-      })
+      // const resp = await fetch("https://lalocura-go-production.up.railway.app" + "/user-account", {
+      //   method: "POST",
+      //   credentials: 'include',
+      //   headers: {
+      //     "Content-Type": "application/json"
+      //   },
+      //   body: JSON.stringify({
+      //     email,
+      //     password
+      //   })
+      // })
 
-      console.log(resp.status);
+      // console.log(resp.status);
 
-      const data = await resp.json()
+      // const data = await resp.json()
 
     } else {
 
