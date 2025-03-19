@@ -1,56 +1,32 @@
 import { useRef } from 'react'
 import './App.css'
+import { AUTH_KEY } from './utils'
+import { BrowserRouter as Router, Routes,  Route, Navigate } from "react-router-dom"
+import Signup from './pages/Signup'
+import { useUser } from './hooks/useUser'
+import Dashboard from './pages/dashboard/Dashboard'
+import Navbar from './components/Navbar'
+import CreateFoodShopPage from './pages/create-food-shop/CreateFoodShopPage'
 
 function App() {
-  const emailRef = useRef(null)
-  const passwordRef = useRef(null)
-
-  const submitForm = async () => {
-    const emailRx = /^[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
-
-    const email = emailRef.current.value
-    const password = passwordRef.current.value
-    
-    console.log(import.meta.env.API_URL);
-    
-
-    if (emailRx.test(email)) {
-      const resp = await fetch("https://lalocura-go-production.up.railway.app" + "/user-account", {
-        method: "POST",
-        credentials: 'include',
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          email,
-          password
-        })
-      })
-
-      console.log(resp.status);
-
-
-    } else {
-
-    }
+  const { user } = useUser()
+  console.log(user);
   
-    console.log(email)
-    console.log(password)
-  }
 
   return (
     <>
-      <div className='w-[100vw] min-h-screen bg-white flex flex-col text-black'>
-        <p>Email</p>
-        <input type="email" ref={emailRef} className=' border' />
+      <div className='font-mono'>
+        <Navbar />
+        <Router>
+          <Routes>
+          <Route path='/signup' element={user ? <Navigate to={"/"}/> : <Signup />} />
+          <Route path='/' element={!user ? <Navigate to={"/signup"}/> : !user.foodShop ? <CreateFoodShopPage /> : <Dashboard />} />
 
-        <p>Password</p>
-        <input type="password" ref={passwordRef} className=' border' />
+          </Routes>
+        </Router>
 
-        <button onClick={submitForm} className='bg-white text-black border'>
-          Submit
-        </button>
       </div>
+     
     </>
   )
 }
